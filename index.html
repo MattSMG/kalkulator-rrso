@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="pl" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RRSO leasing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: #f5f5f7;
+  min-height: 100%;
+  width: 100%;
+  padding: 40px 20px;
+  overflow-auto;
+}
+
+.card {
+  max-width: 680px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 48px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.08);
+}
+
+.header-section {
+  background: #D10C9A;
+  margin: -48px -48px 48px -48px;
+  padding: 32px 48px;
+  border-radius: 18px 18px 0 0;
+}
+
+.logo-top {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto 24px auto;
+  border-radius: 8px;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 900 !important;
+  color: #ffffff !important;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1.1;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0 0 1px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+  font-size: 17px;
+  color: #6e6e73;
+  margin: 0 0 48px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.input-group {
+  margin-bottom: 24px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #d2d2d7;
+  font-size: 17px;
+  transition: all 0.2s;
+  font-family: inherit;
+  background: #ffffff;
+}
+
+input:focus {
+  outline: none;
+  border-color: #D10C9A;
+  box-shadow: 0 0 0 4px rgba(209, 12, 154, 0.1);
+}
+
+button {
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  border: 0;
+  background: #D10C9A !important;
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0 0 1px rgba(0,0,0,0.3);
+}
+
+button:hover {
+  background: #b50a85;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(209, 12, 154, 0.3);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.result {
+  margin-top: 48px;
+  padding: 32px;
+  background: #f5f5f7;
+  border-radius: 18px;
+  display: none;
+}
+
+.result.visible {
+  display: block;
+}
+
+.big {
+  font-size: 56px;
+  font-weight: 700;
+  color: #D10C9A;
+  margin: 0 0 8px;
+  letter-spacing: -1px;
+}
+
+.cost-info {
+  font-size: 19px;
+  color: #6e6e73;
+  margin-bottom: 32px;
+  font-weight: 500;
+}
+
+.explanation {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  margin-top: 24px;
+}
+
+.explanation-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 0 0 12px;
+}
+
+.explanation-text {
+  font-size: 15px;
+  color: #6e6e73;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.diagnosis {
+  margin-top: 32px;
+  padding: 28px;
+  border-radius: 18px;
+  border: 2px solid;
+  background: #ffffff;
+}
+
+.diagnosis.cheap {
+  border-color: #34c759;
+  background: #f0fdf4;
+}
+
+.diagnosis.fair {
+  border-color: #007aff;
+  background: #f0f9ff;
+}
+
+.diagnosis.expensive {
+  border-color: #ff3b30;
+  background: #fff5f5;
+}
+
+.diagnosis-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.diagnosis-icon {
+  font-size: 32px;
+  margin-right: 12px;
+}
+
+.diagnosis-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+.diagnosis-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.diagnosis.cheap .diagnosis-badge {
+  background: #34c759;
+  color: #fff;
+}
+
+.diagnosis.fair .diagnosis-badge {
+  background: #007aff;
+  color: #fff;
+}
+
+.diagnosis.expensive .diagnosis-badge {
+  background: #ff3b30;
+  color: #fff;
+}
+
+.diagnosis-content {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.diagnosis-meaning, .diagnosis-action {
+  margin-bottom: 16px;
+}
+
+.diagnosis-meaning strong, .diagnosis-action strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #1d1d1f;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.diagnosis-meaning p, .diagnosis-action p {
+  margin: 0;
+  color: #6e6e73;
+}
+
+.disclaimer {
+  margin-top: 32px;
+  padding: 24px;
+  background: #fff9e6;
+  border-radius: 12px;
+  border: 1px solid #f5d900;
+}
+
+.disclaimer-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 0 0 12px;
+}
+
+.disclaimer p {
+  font-size: 14px;
+  color: #6e6e73;
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+
+.disclaimer p:last-child {
+  margin-bottom: 0;
+}
+
+.how-to-read {
+  margin-top: 48px;
+  padding: 24px;
+  background: #f5f5f7;
+  border-radius: 12px;
+}
+
+.how-to-read-title {
+  font-size: 19px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 0 0 20px;
+}
+
+.tip {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.tip:last-child {
+  margin-bottom: 0;
+}
+
+.tip-icon {
+  font-size: 24px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.tip-text {
+  font-size: 15px;
+  color: #6e6e73;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.tip-text strong {
+  color: #1d1d1f;
+  font-weight: 600;
+}
+
+.footer-section {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 2px solid #e5e5e7;
+  text-align: center;
+}
+
+.logo-bottom {
+  max-width: 150px;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px auto;
+  border-radius: 8px;
+}
+
+.footer-text {
+  margin-top: 16px;
+}
+
+.author {
+  font-size: 15px;
+  color: #1d1d1f;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.copyright {
+  font-size: 14px;
+  color: #6e6e73;
+  margin: 0;
+}
+  </style>
+</head>
+<body class="h-full">
+  <div class="wrapper">
+    <div class="card">
+      <div class="header-section">
+        <img src="https://i.ibb.co/96KVk0t/IMG-6145.jpg" alt="Leasinguj Tak Logo" class="logo-top" onerror="this.style.display='none'">
+        <h1 id="main-title">KALKULATOR RRSO</h1>
+      </div>
+      <p class="subtitle">Kalkulator pokazuje realny roczny koszt pieniądza w leasingu – liczony na podstawie wszystkich płatności</p>
+      <div class="input-group">
+        <label for="price">Cena netto (zł)</label>
+        <input id="price" type="number" value="100000">
+      </div>
+      <div class="input-group">
+        <label for="down">Opłata wstępna (zł)</label>
+        <input id="down" type="number" value="10000">
+      </div>
+      <div class="input-group">
+        <label for="n">Liczba rat (miesięcy)</label>
+        <input id="n" type="number" value="60">
+      </div>
+      <div class="input-group">
+        <label for="rate">Rata miesięczna netto (zł)</label>
+        <input id="rate" type="number" value="1500">
+      </div>
+      <div class="input-group">
+        <label for="buy">Wykup końcowy (zł)</label>
+        <input id="buy" type="number" value="20000">
+      </div>
+      <button id="calc-button">OBLICZ RRSO</button>
+      <div class="result" id="result">
+        <div class="big" id="rrso">–</div>
+        <div class="cost-info" id="info"></div>
+        <div class="explanation">
+          <div class="explanation-title" id="explanation-title">Co to oznacza?</div>
+          <p class="explanation-text" id="explanation-text">RRSO to realny roczny koszt pieniądza w Twoim leasingu. To nie jest oprocentowanie kredytu, ale pokazuje ile faktycznie płacisz za możliwość rozłożenia zakupu w czasie.</p>
+        </div>
+        <div class="diagnosis" id="diagnosis">
+          <div class="diagnosis-header">
+            <span class="diagnosis-icon" id="diagnosis-icon">🔍</span>
+            <div class="diagnosis-title">Diagnoza – czy przepłacam?</div>
+          </div>
+          <div class="diagnosis-badge" id="diagnosis-badge">AKCEPTOWALNA</div>
+          <div class="diagnosis-content">
+            <div class="diagnosis-meaning">
+              <strong>Co to znaczy:</strong>
+              <p id="diagnosis-meaning-text"></p>
+            </div>
+            <div class="diagnosis-action">
+              <strong>Co zrobić:</strong>
+              <p id="diagnosis-action-text"></p>
+            </div>
+          </div>
+        </div>
+        <div class="disclaimer">
+          <div class="disclaimer-title">⚠️ Ważne zastrzeżenie</div>
+          <p><strong>Ten kalkulator jest narzędziem pomocniczym do orientacyjnej oceny ofert leasingowych.</strong></p>
+          <p>Przedstawione wyniki oraz kolorowa ocena opierają się na typowych warunkach spotykanych w oferach polskich firm leasingowych. Pokazują orientacyjny obraz kosztów, ale nie uwzględniają wszystkich indywidualnych okoliczności.</p>
+          <p><strong>Każda oferta jest inna</strong> – na jej ostateczny koszt wpływają m.in. Twoja historia kredytowa, branża działalności, profil ryzyka oraz aktualna polityka cenowa leasingodawcy. Traktuj ten wynik jako punkt odniesienia, nie jako wiążącą opinię finansową.</p>
+        </div>
+      </div>
+      <div class="how-to-read">
+        <div class="how-to-read-title">Jak to czytać?</div>
+        <div class="tip">
+          <div class="tip-icon">💰</div>
+          <p class="tip-text"><strong>RRSO 8%</strong> oznacza, że rocznie płacisz ok. 8% wartości sfinansowanej kwoty jako koszt leasingu</p>
+        </div>
+        <div class="tip">
+          <div class="tip-icon">📊</div>
+          <p class="tip-text"><strong>Im niższe RRSO</strong>, tym tańsza oferta – porównuj między leasingodawcami</p>
+        </div>
+        <div class="tip">
+          <div class="tip-icon">🎯</div>
+          <p class="tip-text"><strong>TCO (Total Cost of Ownership)</strong> pokazuje ile ŁĄCZNIE zapłacisz za cały okres leasingu ponad cenę netto pojazdu</p>
+        </div>
+        <div class="tip">
+          <div class="tip-icon">✅</div>
+          <p class="tip-text"><strong>To nie jest oficjalne RRSO KNF</strong> – to narzędzie edukacyjne do porównywania ofert</p>
+        </div>
+      </div>
+      <div class="footer-section">
+        <img src="https://i.ibb.co/96KVk0t/IMG-6145.jpg" alt="Leasinguj Tak Logo" class="logo-bottom" onerror="this.style.display='none'">
+        <div class="footer-text">
+          <p class="author">Opracowanie: Andżelika Minowska</p>
+          <p class="copyright">© 2025 Leasinguj Tak. Wszelkie prawa zastrzeżone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+function xirr(cf) {
+  let r = 0.1;
+  for(let i = 0; i < 100; i++) {
+    let f = 0, df = 0;
+    for(let j = 0; j < cf.length; j++) {
+      f += cf[j] / Math.pow(1 + r, j / 12);
+      df += -j / 12 * cf[j] / Math.pow(1 + r, j / 12 + 1);
+    }
+    r -= f / df;
+  }
+  return r;
+}
+
+function getDiagnosis(rrsoPercent) {
+  if (rrsoPercent < 5) {
+    return {
+      type: 'cheap',
+      icon: '✨',
+      badge: 'ATRAKCYJNA OFERTA',
+      meaning: 'RRSO poniżej 5% pojawia się naprawdę rzadko. To wyjątkowo niski koszt w porównaniu do standardowych ofert leasingowych dostępnych na polskim rynku.',
+      action: 'Sprawdź szczegóły umowy bardzo dokładnie. Upewnij się, że niska stawka nie jest równoważona ukrytymi kosztami w postaci obowiązkowych ubezpieczeń, wysokich prowizji lub opłat serwisowych. Przy czystych warunkach to prawdziwa perełka.'
+    };
+  } else if (rrsoPercent >= 5 && rrsoPercent <= 9) {
+    return {
+      type: 'fair',
+      icon: '👍',
+      badge: 'AKCEPTOWALNA',
+      meaning: 'Przedział 5-9% to standardowy poziom kosztów, z którym spotykasz się u większości leasingodawców. Twoja oferta wpisuje się dokładnie w rynkową normę.',
+      action: 'To uczciwa propozycja bez czerwonych flag. Warto jeszcze sprawdzić alternatywy i ewentualnie spróbować wynegocjować niższą stawkę, ale ogólnie możesz czuć się komfortowo z tym poziomem kosztów.'
+    };
+  } else {
+    return {
+      type: 'expensive',
+      icon: '⚠️',
+      badge: 'KOSZTOWNA',
+      meaning: 'RRSO przekraczające 9% plasuje się powyżej typowych stawek rynkowych. Płacisz wyraźnie więcej za finansowanie niż standardowy klient w przeciętnej ofercie.',
+      action: 'Zapytaj o szczegółowy breakdown kosztów i sprawdź, które elementy najbardziej windują ostateczną stawkę. Zdecydowanie warto zebrać kilka konkurencyjnych ofert – istnieje duża szansa na znalezienie lepszych warunków.'
+    };
+  }
+}
+
+function calc() {
+  const priceInput = document.getElementById('price');
+  const downInput = document.getElementById('down');
+  const nInput = document.getElementById('n');
+  const rateInput = document.getElementById('rate');
+  const buyInput = document.getElementById('buy');
+  const rrsoEl = document.getElementById('rrso');
+  const infoEl = document.getElementById('info');
+  const resultEl = document.getElementById('result');
+
+  let p = +priceInput.value;
+  let d = +downInput.value;
+  let n = +nInput.value;
+  let r = +rateInput.value;
+  let b = +buyInput.value;
+
+  let cf = [p - d];
+  for(let i = 1; i <= n; i++) cf.push(-r);
+  cf[n] -= b;
+
+  let rr = xirr(cf);
+  let rrsoPercent = rr * 100;
+
+  rrsoEl.textContent = rrsoPercent.toFixed(2) + "% rocznie";
+
+  // TCO calculation: suma wszystkich płatności minus cena netto
+  let totalPayments = d + (r * n) + b;
+  let tco = totalPayments - p;
+  infoEl.textContent = "TCO (całkowity koszt leasingu): " + tco.toFixed(0) + " zł za cały okres";
+
+  const diagnosis = getDiagnosis(rrsoPercent);
+  const diagnosisEl = document.getElementById('diagnosis');
+
+  diagnosisEl.classList.remove('cheap', 'fair', 'expensive');
+  diagnosisEl.classList.add(diagnosis.type);
+  document.getElementById('diagnosis-icon').textContent = diagnosis.icon;
+  document.getElementById('diagnosis-badge').textContent = diagnosis.badge;
+  document.getElementById('diagnosis-meaning-text').textContent = diagnosis.meaning;
+  document.getElementById('diagnosis-action-text').textContent = diagnosis.action;
+
+  resultEl.classList.add('visible');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('calc-button').addEventListener('click', calc);
+});
+  </script>
+</body>
+</html>
